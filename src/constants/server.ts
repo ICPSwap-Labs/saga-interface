@@ -1,5 +1,3 @@
-const { port, host: originHost } = require("./host");
-
 export enum NETWORK {
   IC = "ic",
   TEST = "test",

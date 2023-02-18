@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material/styles";
-import colors from "../assets/scss/_themes-vars.module.scss";
 import { componentStyleOverrides } from "./compStyleOverride";
 import { themePalette } from "./palette";
 
@@ -21,7 +20,6 @@ export function theme() {
     direction: "rtl",
     palette: themePalette(),
     components: componentStyleOverrides(),
-    colors,
     fontSize,
     radius: Radius,
   });

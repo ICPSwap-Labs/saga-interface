@@ -1,5 +1,3 @@
-import { createTheme } from "@mui/material";
-
 export function componentStyleOverrides() {
   return {
     MuiButton: {

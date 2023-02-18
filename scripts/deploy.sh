@@ -15,9 +15,6 @@ deploy_local() {
 
   dfx identity use icpswap-v2
 
-  yarn run i18n:extract
-  yarn run i18n:compile
-
   dfx deploy --network=local --no-wallet --with-cycles=200000000000000000
 }
 
@@ -36,9 +33,6 @@ deploy_test() {
 
   dfx identity use icpswap-v2
 
-  yarn run i18n:extract
-  yarn run i18n:compile
-
   dfx deploy --network=test --no-wallet --with-cycles=200000000000000000
 
   cp -R .dfx/test/canister_ids.json ./canister_ids_test.json 
@@ -46,9 +40,6 @@ deploy_test() {
 
 deploy_ic() {
   echo "deploying ic..."
-
-  yarn run i18n:extract
-  yarn run i18n:compile
 
   copy_env
 

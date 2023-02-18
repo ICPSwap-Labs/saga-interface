@@ -9,7 +9,6 @@ const {
 const path = require("path");
 const webpack = require("webpack");
 const dfxJson = require("./dfx.json");
-const { port, host } = require("./src/constants/host");
 
 const aliases = Object.entries(dfxJson.canisters).reduce((acc, [name, _value]) => {
   return {
@@ -29,15 +28,8 @@ const aliases = Object.entries(dfxJson.canisters).reduce((acc, [name, _value]) =
 const addProxy = () => (configFunction) => {
   configFunction.proxy = {
     "/api": {
-      target: `${host}:${port}`,
+      target: `http://localhost:8000`,
       changeOrigin: true,
-    },
-    "/dfx_image": {
-      target: `${host}:${port}`,
-      changeOrigin: true,
-      pathRewrite: {
-        "^/dfx_image": "",
-      },
     },
   };
 

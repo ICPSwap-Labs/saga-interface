@@ -7,7 +7,4 @@ chmod 777 ./scripts/env.sh
 chmod 777 ./scripts/canister_ids_json.sh
 ./scripts/canister_ids_json.sh all local
 
-# locales
-yarn i18n:extract
-
 yarn start

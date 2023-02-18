@@ -1,6 +1,5 @@
 import Decimal from "decimal.js";
 import dayjs from "dayjs";
-import { ICP_TOKEN_INFO } from "../constants/tokens";
 import { BigNumber, parseTokenAmount, toSignificant } from "@icpswap/sdk";
 
 // TODO: hijack bigint
@@ -127,10 +126,6 @@ export function transactionsTypeFormat(type: any): string {
     }
   }
   return type;
-}
-
-export function isICP(tokenSymbol: string): boolean {
-  return tokenSymbol === ICP_TOKEN_INFO.symbol;
 }
 
 export function moErrMessageFormat(errMessage: string): string {
@@ -285,8 +280,5 @@ export function toFormat(value: string | number | BigNumber | undefined) {
 export function toSignificantFormatted(val: number | string, dig: number = 8) {
   return toSignificant(val, dig, { groupSeparator: "," });
 }
-
-export * from "./numbers";
-export * from "./type";
 
 export { principalToAddress } from "@icpswap/sdk";
