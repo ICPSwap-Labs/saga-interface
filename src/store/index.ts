@@ -8,29 +8,19 @@ import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 
 import { SnackbarState } from "./snackbar/states";
 import { LoadingState } from "./loadingReducer";
+import { GlobalState } from "./global/states";
 
 export interface AllState {
   loading: LoadingState;
-
   snackbar: SnackbarState;
+  global: GlobalState;
 }
 
 const rootPersistConfig = {
   key: "root",
   storage: storage,
   stateReconciler: autoMergeLevel2,
-  blacklist: ["cache", "session", "global", "loading", "snackbar"],
-  migrate: (state: any) => {
-    let newState = {};
-
-    if (state?._persist?.version === -1) {
-      newState = { ...(state ?? {}), auth: {} };
-    } else {
-      newState = { ...(state ?? {}) };
-    }
-
-    return Promise.resolve(newState);
-  },
+  blacklist: ["session", "loading", "snackbar"],
   version: 1,
 };
 

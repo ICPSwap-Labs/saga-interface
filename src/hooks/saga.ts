@@ -4,7 +4,7 @@ import { useCallsData } from "@icpswap/calls";
 import { useCallback } from "react";
 import { makeId } from "utils/saga";
 import { EventLang } from "types/saga";
-import { getIdentity } from "hooks/useIdentity";
+import { getIdentity, useIdentity } from "hooks/useIdentity";
 
 export async function create(args: EventLangRequest) {
   const identity = await getIdentity();
@@ -17,11 +17,13 @@ export async function deleteSaga(args: string) {
 }
 
 export function useSagas() {
+  const identity = useIdentity();
+
   return useCallsData(
     useCallback(async () => {
       const identity = await getIdentity();
       const sagas = (await (await saga(identity)).find()) ?? [];
       return sagas.map((saga) => ({ ...saga, _id: makeId() })) as EventLang[];
-    }, [])
+    }, [identity])
   );
 }

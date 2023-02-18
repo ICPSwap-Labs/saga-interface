@@ -1,36 +1,31 @@
 import React from "react";
-import { makeStyles } from "@mui/styles";
-import { CssBaseline, Box } from "@mui/material";
-import { Theme } from "@mui/material/styles";
-
-const useStyles = makeStyles((theme: Theme) => {
-  return {
-    content: {
-      background: "transparent",
-      width: "100%",
-      minHeight: "calc(100vh - 64px)",
-      flexGrow: 1,
-      padding: "20px",
-      borderRadius: "8px",
-      borderBottomLeftRadius: 0,
-      borderBottomRightRadius: 0,
-    },
-    mainContent: {
-      paddingTop: "64px",
-    },
-  };
-});
+import { Button, Box } from "@mui/material";
+import { useIdentity } from "hooks/useIdentity";
+import { shortenAddress } from "@icpswap/sdk";
+import { useToggleKey } from "store/global/hooks";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
-  const classes = useStyles();
+  const identity = useIdentity();
+
+  const toggle = useToggleKey();
+
+  const handleToggleAccount = () => {
+    toggle();
+  };
 
   return (
-    <>
-      <CssBaseline />
-
-      <Box className={classes.mainContent}>
-        <main className={classes.content}>{children}</main>
+    <Box
+      sx={{
+        padding: "20px",
+      }}
+    >
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button variant="outlined" onClick={handleToggleAccount}>
+          {shortenAddress(identity?.getPrincipal().toString())}
+        </Button>
       </Box>
-    </>
+
+      <main>{children}</main>
+    </Box>
   );
 }

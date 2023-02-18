@@ -9,19 +9,13 @@ const fontSize = {
   lg: "1.25rem",
 };
 
-const Radius = 12;
-
-export interface ThemeOption {
-  [key: string]: any;
-}
-
 export function theme() {
   return createTheme({
     direction: "rtl",
     palette: themePalette(),
     components: componentStyleOverrides(),
     fontSize,
-    radius: Radius,
+    radius: 12,
   });
 }
 

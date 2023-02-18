@@ -123,7 +123,6 @@ declare module "@mui/material/styles" {
       overflowEllipsis: any;
       overflowEllipsis2: any;
     };
-    customShadows: any;
     typography: any;
     components: any;
     themeOption: any;
@@ -148,7 +147,6 @@ declare module "@mui/material/styles" {
       overflowEllipsis: any;
       overflowEllipsis2: any;
     };
-    customShadows?: any;
     typography?: any;
     components?: any;
     themeOption?: any;

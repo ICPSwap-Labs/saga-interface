@@ -15,13 +15,11 @@ const aliases = Object.entries(dfxJson.canisters).reduce((acc, [name, _value]) =
     ...acc,
     buffer: path.resolve(__dirname, "./node_modules/buffer"),
     process: "process/browser.js",
-    "ui-component": path.resolve(__dirname, "./src/ui-component"),
     store: path.resolve(__dirname, "./src/store"),
     constants: path.resolve(__dirname, "./src/constants"),
     assets: path.resolve(__dirname, "./src/assets"),
     hooks: path.resolve(__dirname, "./src/hooks"),
     utils: path.resolve(__dirname, "./src/utils"),
-    declaration: path.resolve(__dirname, "./src/declaration"),
   };
 }, {});
 

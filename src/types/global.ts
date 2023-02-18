@@ -38,6 +38,6 @@ export type DynamicObject = {
 export type ICPIdentity = Ed25519KeyIdentity | Secp256k1KeyIdentity;
 
 export type Identity = ActorIdentity;
-export type CallIdentity = ActorIdentity;
+export type CallIdentity = Ed25519KeyIdentity;
 
 export type Override<P, S> = Omit<P, keyof S> & S;
