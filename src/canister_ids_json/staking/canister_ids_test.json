@@ -1,0 +1,17 @@
+{
+  "LockServer": {
+    "test": "vj4vq-xyaaa-aaaaa-aaaza-cai"
+  },
+  "SwapStaker": {
+    "test": "vvypb-ayaaa-aaaaa-aaa3a-cai"
+  },
+  "SwapStakerController": {
+    "test": "vo5te-2aaaa-aaaaa-aaazq-cai"
+  },
+  "SwapStakerStorage": {
+    "test": "vszjv-naaaa-aaaaa-aaa3q-cai"
+  },
+  "__Candid_UI": {
+    "test": "v32cj-3iaaa-aaaaa-aaa2a-cai"
+  }
+}

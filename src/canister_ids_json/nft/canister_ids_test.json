@@ -1,0 +1,29 @@
+{
+  "Airdrop": {
+    "test": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+  },
+  "NFTAirdrop": {
+    "test": "qoctq-giaaa-aaaaa-aaaea-cai"
+  },
+  "V3ICSNFT": {
+    "test": "qjdve-lqaaa-aaaaa-aaaeq-cai"
+  },
+  "V3NFT": {
+    "test": "qaa6y-5yaaa-aaaaa-aaafa-cai"
+  },
+  "V3NFTCanisterController": {
+    "test": "qhbym-qaaaa-aaaaa-aaafq-cai"
+  },
+  "V3NFTValentinesDay": {
+    "test": "qsgjb-riaaa-aaaaa-aaaga-cai"
+  },
+  "V3TradeCanister": {
+    "test": "qvhpv-4qaaa-aaaaa-aaagq-cai"
+  },
+  "V3TradeStat": {
+    "test": "q4eej-kyaaa-aaaaa-aaaha-cai"
+  },
+  "__Candid_UI": {
+    "test": "wmio3-kqaaa-aaaaa-aaasq-cai"
+  }
+}

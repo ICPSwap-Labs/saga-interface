@@ -1,0 +1,59 @@
+{
+  "Admin": {
+    "test": "si2b5-pyaaa-aaaaa-aaaja-cai"
+  },
+  "LockServer": {
+    "test": "sp3hj-caaaa-aaaaa-aaajq-cai"
+  },
+  "Log": {
+    "test": "s24we-diaaa-aaaaa-aaaka-cai"
+  },
+  "SwapCanisterController": {
+    "test": "s55qq-oqaaa-aaaaa-aaakq-cai"
+  },
+  "SwapFactory": {
+    "test": "su63m-yyaaa-aaaaa-aaala-cai"
+  },
+  "SwapFeeHolder": {
+    "test": "st75y-vaaaa-aaaaa-aaalq-cai"
+  },
+  "SwapNFTCanister": {
+    "test": "t6rzw-2iaaa-aaaaa-aaama-cai"
+  },
+  "SwapPositionManager": {
+    "test": "tzq7c-xqaaa-aaaaa-aaamq-cai"
+  },
+  "SwapRecordData": {
+    "test": "tqtu6-byaaa-aaaaa-aaana-cai"
+  },
+  "SwapRecordDataBack": {
+    "test": "txssk-maaaa-aaaaa-aaanq-cai"
+  },
+  "SwapRouter": {
+    "test": "tcvdh-niaaa-aaaaa-aaaoa-cai"
+  },
+  "TokenCanisterController": {
+    "test": "tfuft-aqaaa-aaaaa-aaaoq-cai"
+  },
+  "TokenMinter": {
+    "test": "tmxop-wyaaa-aaaaa-aaapa-cai"
+  },
+  "V3NFT": {
+    "test": "tlwi3-3aaaa-aaaaa-aaapq-cai"
+  },
+  "V3NFTCanisterController": {
+    "test": "wxns6-qiaaa-aaaaa-aaaqa-cai"
+  },
+  "V3NFTValentinesDay": {
+    "test": "wqmuk-5qaaa-aaaaa-aaaqq-cai"
+  },
+  "V3SwapNFTCanister": {
+    "test": "wzp7w-lyaaa-aaaaa-aaara-cai"
+  },
+  "V3TradeCanister": {
+    "test": "w6ozc-gaaaa-aaaaa-aaarq-cai"
+  },
+  "__Candid_UI": {
+    "test": "wljip-hiaaa-aaaaa-aaasa-cai"
+  }
+}

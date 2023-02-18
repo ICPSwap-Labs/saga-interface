@@ -1,0 +1,23 @@
+{
+  "FaucetController": {
+    "test": "st75y-vaaaa-aaaaa-aaalq-cai"
+  },
+  "WICP_T": {
+    "test": "rno2w-sqaaa-aaaaa-aaacq-cai"
+  },
+  "__Candid_UI": {
+    "test": "renrk-eyaaa-aaaaa-aaada-cai"
+  },
+  "dip20": {
+    "test": "s55qq-oqaaa-aaaaa-aaakq-cai"
+  },
+  "faucet": {
+    "test": "t6rzw-2iaaa-aaaaa-aaama-cai"
+  },
+  "faucet_dip20": {
+    "test": "tzq7c-xqaaa-aaaaa-aaamq-cai"
+  },
+  "token": {
+    "test": "sbzkb-zqaaa-aaaaa-aaaiq-cai"
+  }
+}
