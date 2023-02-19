@@ -3,10 +3,11 @@ import { actor } from "@icpswap/calls";
 import { idlFactory } from "did/saga";
 import { _SERVICE } from "did/saga.did";
 import { host } from "constants/server";
+import { SAGA_ID } from "constants/index";
 
 export const saga = (identity?: CallIdentity) => {
   return actor.create<_SERVICE>({
-    canisterId: "qaa6y-5yaaa-aaaaa-aaafa-cai",
+    canisterId: SAGA_ID,
     idlFactory: idlFactory,
     identity,
     host,

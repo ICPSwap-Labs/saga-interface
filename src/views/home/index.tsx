@@ -6,6 +6,7 @@ import { openTip, MessageTypes } from "hooks/useTips";
 import { Node, Value } from "types/saga";
 import { makeId } from "utils/saga";
 import Sagas from "./sagas";
+import SagaContext from "./context";
 
 const DefaultValue = { name: "", comment: "" };
 
@@ -13,6 +14,7 @@ export default function Home() {
   const [values, setValues] = useState<Value>(DefaultValue);
   const [nodes, setNodes] = useState<Node[]>([]);
   const [loading, setLoading] = useState(false);
+  const [reload, setReload] = useState(false);
 
   const handleAdd = () => {
     const _nodes = [
@@ -72,6 +74,7 @@ export default function Home() {
       openTip("Created successfully", MessageTypes.success);
       setValues(DefaultValue);
       setNodes([]);
+      setReload(!reload);
     } else {
       openTip("Failed to create", MessageTypes.error);
     }
@@ -100,124 +103,128 @@ export default function Home() {
   if (!values.name) error = "Enter the name";
 
   return (
-    <MainLayout>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: "40px 0" }}>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography fontSize={14} sx={{ margin: "0 20px 0 0", width: "120px" }}>
-            Name
-          </Typography>
-          <TextField
-            sx={{ width: "360px" }}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleValueChange(event, "name")}
-          />
-        </Box>
+    <SagaContext.Provider value={{ reload, setReload: () => setReload(!reload) }}>
+      <MainLayout>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "40px 0" }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Typography fontSize={14} sx={{ margin: "0 20px 0 0", width: "120px" }}>
+              Name
+            </Typography>
+            <TextField
+              sx={{ width: "360px" }}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleValueChange(event, "name")}
+            />
+          </Box>
 
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography fontSize={14} sx={{ margin: "0 20px 0 0", width: "120px" }}>
-            Description
-          </Typography>
-          <TextField
-            sx={{ width: "360px" }}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleValueChange(event, "comment")}
-          />
-        </Box>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Typography fontSize={14} sx={{ margin: "0 20px 0 0", width: "120px" }}>
+              Description
+            </Typography>
+            <TextField
+              sx={{ width: "360px" }}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleValueChange(event, "comment")}
+            />
+          </Box>
 
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography fontSize={14} sx={{ margin: "0 20px 0 0", width: "120px" }}>
-            Node
-          </Typography>
-          <Button variant="contained" onClick={handleAdd}>
-            Add
-          </Button>
-        </Box>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Typography fontSize={14} sx={{ margin: "0 20px 0 0", width: "120px" }}>
+              Node
+            </Typography>
+            <Button variant="contained" onClick={handleAdd}>
+              Add
+            </Button>
+          </Box>
 
-        {nodes.length > 0 ? (
-          <Box sx={{ padding: "0 0 0 120px", display: "flex", gap: "10px 0", flexDirection: "column" }}>
-            {nodes.map((node) => (
-              <Box
-                sx={{
-                  display: "flex",
-                  width: "fit-content",
-                  alignItems: "center",
-                  padding: "20px",
-                  border: "1px solid #333",
-                  gap: "0 10px",
-                }}
-                key={node._id}
-              >
+          {nodes.length > 0 ? (
+            <Box sx={{ padding: "0 0 0 120px", display: "flex", gap: "10px 0", flexDirection: "column" }}>
+              {nodes.map((node) => (
                 <Box
                   sx={{
-                    flex: "auto",
                     display: "flex",
-                    gap: "10px 0",
-                    flexDirection: "column",
+                    width: "fit-content",
+                    alignItems: "center",
+                    padding: "20px",
+                    border: "1px solid #333",
+                    gap: "0 10px",
                   }}
+                  key={node._id}
                 >
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <Typography fontSize={12} sx={{ margin: "0 20px 0 0", width: "120px" }}>
-                      Name
-                    </Typography>
-                    <TextField
-                      sx={{ width: "360px" }}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        handleNodeChange(event, node._id, "name")
-                      }
-                    />
+                  <Box
+                    sx={{
+                      flex: "auto",
+                      display: "flex",
+                      gap: "10px 0",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Typography fontSize={12} sx={{ margin: "0 20px 0 0", width: "120px" }}>
+                        Name
+                      </Typography>
+                      <TextField
+                        sx={{ width: "360px" }}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          handleNodeChange(event, node._id, "name")
+                        }
+                      />
+                    </Box>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Typography fontSize={12} sx={{ margin: "0 20px 0 0", width: "120px" }}>
+                        Canister ID
+                      </Typography>
+                      <TextField
+                        sx={{ width: "360px" }}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          handleNodeChange(event, node._id, "id")
+                        }
+                      />
+                    </Box>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Typography fontSize={12} sx={{ margin: "0 20px 0 0", width: "120px" }}>
+                        Func Name
+                      </Typography>
+                      <TextField
+                        sx={{ width: "360px" }}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          handleNodeChange(event, node._id, "func_name")
+                        }
+                      />
+                    </Box>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Typography fontSize={12} sx={{ margin: "0 20px 0 0", width: "120px" }}>
+                        Compensate Func Name
+                      </Typography>
+                      <TextField
+                        sx={{ width: "360px" }}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          handleNodeChange(event, node._id, "compensate_func_name")
+                        }
+                      />
+                    </Box>
                   </Box>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <Typography fontSize={12} sx={{ margin: "0 20px 0 0", width: "120px" }}>
-                      Canister ID
-                    </Typography>
-                    <TextField
-                      sx={{ width: "360px" }}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleNodeChange(event, node._id, "id")}
-                    />
-                  </Box>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <Typography fontSize={12} sx={{ margin: "0 20px 0 0", width: "120px" }}>
-                      Func Name
-                    </Typography>
-                    <TextField
-                      sx={{ width: "360px" }}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        handleNodeChange(event, node._id, "func_name")
-                      }
-                    />
-                  </Box>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <Typography fontSize={12} sx={{ margin: "0 20px 0 0", width: "120px" }}>
-                      Compensate Func Name
-                    </Typography>
-                    <TextField
-                      sx={{ width: "360px" }}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        handleNodeChange(event, node._id, "compensate_func_name")
-                      }
-                    />
-                  </Box>
+
+                  <Button variant="contained" onClick={() => handleDelete(node)}>
+                    Delete
+                  </Button>
                 </Box>
+              ))}
+            </Box>
+          ) : null}
 
-                <Button variant="contained" onClick={() => handleDelete(node)}>
-                  Delete
-                </Button>
-              </Box>
-            ))}
+          <Box>
+            <Button variant="contained" disabled={loading || !!error} onClick={handleSave}>
+              {loading ? (
+                <CircularProgress size={18} sx={{ color: "#fff", margin: "0 10px 0 0" }}></CircularProgress>
+              ) : null}
+              {!!error ? error : "Save"}
+            </Button>
           </Box>
-        ) : null}
-
-        <Box>
-          <Button variant="contained" disabled={loading || !!error} onClick={handleSave}>
-            {loading ? (
-              <CircularProgress size={18} sx={{ color: "#fff", margin: "0 10px 0 0" }}></CircularProgress>
-            ) : null}
-            {!!error ? error : "Save"}
-          </Button>
         </Box>
-      </Box>
 
-      <Box mt="40px">
-        <Sagas></Sagas>
-      </Box>
-    </MainLayout>
+        <Box mt="40px">
+          <Sagas></Sagas>
+        </Box>
+      </MainLayout>
+    </SagaContext.Provider>
   );
 }

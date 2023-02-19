@@ -5,6 +5,7 @@ import { useCallback } from "react";
 import { makeId } from "utils/saga";
 import { EventLang } from "types/saga";
 import { getIdentity, useIdentity } from "hooks/useIdentity";
+import { enumResultFormat } from "@icpswap/sdk";
 
 export async function create(args: EventLangRequest) {
   const identity = await getIdentity();
@@ -16,14 +17,16 @@ export async function deleteSaga(args: string) {
   return (await (await saga(identity)).delete(args)) as boolean;
 }
 
-export function useSagas() {
+export function useSagas(reload?: boolean) {
   const identity = useIdentity();
 
   return useCallsData(
     useCallback(async () => {
       const identity = await getIdentity();
-      const sagas = (await (await saga(identity)).find()) ?? [];
-      return sagas.map((saga) => ({ ...saga, _id: makeId() })) as EventLang[];
-    }, [identity])
+      const sagas = enumResultFormat<EventLang[]>(await (await saga(identity)).find()).data;
+      return sagas?.map((saga) => ({ ...saga, _id: makeId() })) as EventLang[];
+    }, [identity]),
+    true,
+    reload
   );
 }
