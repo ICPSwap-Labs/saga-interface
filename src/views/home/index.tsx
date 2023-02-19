@@ -113,6 +113,7 @@ export default function Home() {
             <TextField
               sx={{ width: "360px" }}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleValueChange(event, "name")}
+              value={values.name}
             />
           </Box>
 
@@ -123,6 +124,7 @@ export default function Home() {
             <TextField
               sx={{ width: "360px" }}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleValueChange(event, "comment")}
+              value={values.comment}
             />
           </Box>
 
