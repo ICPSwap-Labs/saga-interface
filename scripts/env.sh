@@ -1,7 +1,6 @@
 
 network=$1
 
-REACT_APP_SERVICES='REACT_APP_SERVICES="icpswap-v2,launchpad,staking,token,nft,voting,ICS-Graph,token-list,token-claim,icpswap-v3"'
 EXTEND_ESLINT="EXTEND_ESLINT=true"
 GENERATE_SOURCEMAP="GENERATE_SOURCEMAP=true"
 
@@ -19,17 +18,11 @@ REACT_IC_ENV='REACT_ENV="production"'
 REACT_IC_APP_ENV='REACT_APP_ENV="production"'
 REACT_IC_APP_NETWORK='REACT_APP_IC_NETWORK="ic"'
 
-local_env="${GENERATE_SOURCEMAP}\n${EXTEND_ESLINT}\n${REACT_LOCAL_ENV}\n${REACT_LOCAL_APP_ENV}\n${REACT_LOCAL_APP_NETWORK}\n${REACT_APP_SERVICES}\n"
+local_env="${GENERATE_SOURCEMAP}\n${EXTEND_ESLINT}\n${REACT_LOCAL_ENV}\n${REACT_LOCAL_APP_ENV}\n${REACT_LOCAL_APP_NETWORK}\n"
 
-test_env="${GENERATE_SOURCEMAP}\n${EXTEND_ESLINT}\n${REACT_TEST_ENV}\n${REACT_TEST_APP_ENV}\n${REACT_TEST_APP_NETWORK}\n${REACT_APP_SERVICES}\n"
+ic_env="${GENERATE_IC_SOURCEMAP}\n${EXTEND_IC_ESLINT}\n${REACT_IC_ENV}\n${REACT_IC_APP_ENV}\n${REACT_IC_APP_NETWORK}\n"
 
-ic_env="${GENERATE_IC_SOURCEMAP}\n${EXTEND_IC_ESLINT}\n${REACT_IC_ENV}\n${REACT_IC_APP_ENV}\n${REACT_IC_APP_NETWORK}\n${REACT_APP_SERVICES}\n"
-
-if [ $network = "test" ]
-then
-  printf $test_env > .env
-
-elif [ $network = "ic" ]
+if [ $network = "ic" ]
 then
   printf $ic_env > .env
 
