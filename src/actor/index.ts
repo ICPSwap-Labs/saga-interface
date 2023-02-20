@@ -1,5 +1,5 @@
 import { CallIdentity } from "types/index";
-import { actor } from "@icpswap/calls";
+import { actor } from "actor/actor";
 import { idlFactory } from "did/saga";
 import { _SERVICE } from "did/saga.did";
 import { host } from "constants/server";

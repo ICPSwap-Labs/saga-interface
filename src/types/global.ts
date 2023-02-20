@@ -1,19 +1,13 @@
-import type { Ed25519KeyIdentity, Secp256k1KeyIdentity } from "@dfinity/identity";
-import { ActorIdentity } from "@icpswap/calls";
+import type { Ed25519KeyIdentity } from "@dfinity/identity";
 
 export enum ResultStatus {
   ERROR = "err",
   OK = "ok",
 }
 
-export type StatusResult<T> = {
+export type Result<T> = {
   readonly status: ResultStatus;
-  readonly data: T | string;
-};
-
-export type StatusResult1<T> = {
-  readonly status: ResultStatus;
-  readonly data?: T;
+  readonly data: T | undefined;
   readonly message: string;
 };
 
@@ -24,20 +18,6 @@ export type CallResult<T> = {
 
 export type ApiResult<T> = undefined | T;
 
-export type PaginationResult<T> = {
-  totalElements: number;
-  offset: number;
-  limit: number;
-  content: T[];
-};
-
-export type DynamicObject = {
-  [key: string]: any;
-};
-
-export type ICPIdentity = Ed25519KeyIdentity | Secp256k1KeyIdentity;
-
-export type Identity = ActorIdentity;
 export type CallIdentity = Ed25519KeyIdentity;
 
 export type Override<P, S> = Omit<P, keyof S> & S;

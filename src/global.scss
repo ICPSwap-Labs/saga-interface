@@ -4,18 +4,10 @@ html, body {
   overflow: hidden;
 }
 
-* {
-  font-family: 'Poppins','Roboto',sans-serif!important;
-}
-
 body #root {
   width: 100%;
   height: 100%;
   overflow: auto;
-}
-
-body iframe {
-  border-width: 0px;
 }
 
 ::-webkit-scrollbar {
@@ -30,9 +22,5 @@ body iframe {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: #999;
-}
-
-a {
-  text-decoration-color: #5669dc;
+  background: #000;
 }

@@ -8,20 +8,6 @@ const {
 } = require("customize-cra");
 const path = require("path");
 const webpack = require("webpack");
-const dfxJson = require("./dfx.json");
-
-const aliases = Object.entries(dfxJson.canisters).reduce((acc, [name, _value]) => {
-  return {
-    ...acc,
-    buffer: path.resolve(__dirname, "./node_modules/buffer"),
-    process: "process/browser.js",
-    store: path.resolve(__dirname, "./src/store"),
-    constants: path.resolve(__dirname, "./src/constants"),
-    assets: path.resolve(__dirname, "./src/assets"),
-    hooks: path.resolve(__dirname, "./src/hooks"),
-    utils: path.resolve(__dirname, "./src/utils"),
-  };
-}, {});
 
 const addProxy = () => (configFunction) => {
   configFunction.proxy = {
@@ -38,7 +24,15 @@ module.exports = {
   webpack: function (config, dev) {
     const fn = override(
       removeModuleScopePlugin(),
-      addWebpackAlias(aliases),
+      addWebpackAlias({
+        buffer: path.resolve(__dirname, "./node_modules/buffer"),
+        process: "process/browser.js",
+        store: path.resolve(__dirname, "./src/store"),
+        constants: path.resolve(__dirname, "./src/constants"),
+        assets: path.resolve(__dirname, "./src/assets"),
+        hooks: path.resolve(__dirname, "./src/hooks"),
+        utils: path.resolve(__dirname, "./src/utils"),
+      }),
       useBabelRc(),
       addWebpackPlugin(
         new webpack.ProvidePlugin({

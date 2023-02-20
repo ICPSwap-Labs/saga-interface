@@ -1,6 +1,5 @@
 import { createTheme } from "@mui/material/styles";
 import { componentStyleOverrides } from "./compStyleOverride";
-import { themePalette } from "./palette";
 
 const fontSize = {
   xs: "0.75rem",
@@ -11,11 +10,11 @@ const fontSize = {
 
 export function theme() {
   return createTheme({
-    direction: "rtl",
-    palette: themePalette(),
+    palette: {
+      mode: "light",
+    },
     components: componentStyleOverrides(),
     fontSize,
-    radius: 12,
   });
 }
 
