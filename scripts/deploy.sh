@@ -24,7 +24,7 @@ deploy_ic() {
   copy_env
 
   dfx identity use icpswap-v2
-  dfx deploy --wallet=$(dfx wallet --network=ic get-wallet) --network=ic
+  dfx deploy --wallet=$(dfx identity --network=ic get-wallet) --network=ic
 }
 
 if [ $network = "ic" ]

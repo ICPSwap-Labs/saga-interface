@@ -1,14 +1,17 @@
 import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer } from "@mui/material";
-import { Button, CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Box } from "@mui/material";
 import { useSagas, deleteSaga } from "hooks/saga";
 import { EventLang } from "types/saga";
 import { openTip, MessageTypes } from "hooks/useTips";
 import SagaContext from "./context";
 import { useContext, useState } from "react";
+import { useHistory } from "react-router";
 
 function SagaItem({ saga }: { saga: EventLang }) {
   const [loading, setLoading] = useState(false);
   const { setReload } = useContext(SagaContext);
+
+  const history = useHistory();
 
   const handleDelete = async (saga: EventLang) => {
     if (loading) return;
@@ -23,21 +26,32 @@ function SagaItem({ saga }: { saga: EventLang }) {
     setLoading(false);
   };
 
+  const handleEdit = (saga: EventLang) => {
+    history.push(`/edit/${saga.name}`);
+  };
+
   return (
-    <TableRow>
-      <TableCell>{saga.name}</TableCell>
-      <TableCell>{saga.comment}</TableCell>
-      <TableCell>{saga.owner.toString()}</TableCell>
-      <TableCell>{saga.nodes.length}</TableCell>
-      <TableCell>
-        <Button variant="contained" onClick={() => handleDelete(saga)} disabled={loading}>
-          {loading ? (
-            <CircularProgress size={18} sx={{ color: "#fff", margin: "0 10px 0 0" }}></CircularProgress>
-          ) : null}
-          Delete
-        </Button>
-      </TableCell>
-    </TableRow>
+    <>
+      <TableRow>
+        <TableCell>{saga.name}</TableCell>
+        <TableCell>{saga.comment}</TableCell>
+        <TableCell>{saga.owner.toString()}</TableCell>
+        <TableCell>{saga.nodes.length}</TableCell>
+        <TableCell>
+          <Box sx={{ display: "flex", gap: "0 10px" }}>
+            <Button variant="contained" onClick={() => handleEdit(saga)} disabled={loading}>
+              Edit
+            </Button>
+            <Button variant="contained" onClick={() => handleDelete(saga)} disabled={loading}>
+              {loading ? (
+                <CircularProgress size={18} sx={{ color: "#fff", margin: "0 10px 0 0" }}></CircularProgress>
+              ) : null}
+              Delete
+            </Button>
+          </Box>
+        </TableCell>
+      </TableRow>
+    </>
   );
 }
 

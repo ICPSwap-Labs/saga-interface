@@ -30,3 +30,17 @@ export function useSagas(reload?: boolean) {
     reload
   );
 }
+
+export function useSaga(name: string | undefined, reload?: boolean) {
+  const identity = useIdentity();
+
+  return useCallsData(
+    useCallback(async () => {
+      const identity = await getIdentity();
+      const sagas = enumResultFormat<EventLang[]>(await (await saga(identity)).get(name!)).data;
+      return (sagas ?? []).map((saga) => ({ ...saga, _id: makeId() }))[0] as EventLang;
+    }, [identity, name]),
+    !!identity && !!name,
+    reload
+  );
+}
