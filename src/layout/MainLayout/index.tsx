@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Box } from "@mui/material";
 import { useIdentity } from "hooks/useIdentity";
 import { shortenAddress } from "utils/index";
-import { useToggleKey } from "store/global/hooks";
+import { useToggleKey } from "hooks/useKey";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const identity = useIdentity();

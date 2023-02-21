@@ -2,7 +2,7 @@ import MainLayout from "layout/MainLayout";
 import { TextField, Box, Typography, Button, CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { create, useSaga } from "hooks/saga";
-import { openTip, MessageTypes } from "hooks/useTips";
+import { useTips, MessageTypes } from "hooks/useTips";
 import { Node, Value } from "types/saga";
 import { makeId } from "utils/saga";
 import { useHistory, useParams } from "react-router";
@@ -19,6 +19,8 @@ export default function Edit() {
   const { id } = useParams<{ id: string }>();
 
   const { result: saga } = useSaga(id);
+
+  const openTip = useTips();
 
   useEffect(() => {
     if (saga) {
@@ -92,7 +94,7 @@ export default function Edit() {
     });
 
     if (result) {
-      openTip("Created successfully", MessageTypes.success);
+      openTip("Edit successfully", MessageTypes.success);
       setValues(DefaultValue);
       setNodes([]);
       history.push("/");

@@ -1,19 +1,18 @@
-import { updateKey } from "./actions";
-import { useAppDispatch, useAppSelector } from "store/hooks";
 import { keys } from "constants/key";
 import { useCallback } from "react";
-import store from "store/index";
+
+const storage = window.localStorage;
 
 export function getKey() {
-  return store.getState().global.key;
+  const _key = storage.getItem("key");
+  return _key ? Number(JSON.parse(_key)) : 0;
 }
 
 export function useKey() {
-  return useAppSelector((state) => state.global.key);
+  return getKey();
 }
 
 export function useToggleKey() {
-  const dispatch = useAppDispatch();
   const key = useKey();
 
   return useCallback(() => {
@@ -25,6 +24,6 @@ export function useToggleKey() {
       _key++;
     }
 
-    dispatch(updateKey(_key));
-  }, [key, dispatch]);
+    storage.setItem("key", JSON.stringify(_key));
+  }, [key]);
 }

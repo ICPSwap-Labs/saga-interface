@@ -1,7 +1,7 @@
 import { Ed25519KeyIdentity } from "@dfinity/identity";
 import { CallIdentity } from "types";
 import { keys } from "constants/key";
-import { getKey, useKey } from "store/global/hooks";
+import { getKey, useKey } from "hooks/useKey";
 import { useEffect, useMemo, useState } from "react";
 
 function getSeed(key: string) {

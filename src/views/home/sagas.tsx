@@ -2,7 +2,7 @@ import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer } from
 import { Button, CircularProgress, Box } from "@mui/material";
 import { useSagas, deleteSaga } from "hooks/saga";
 import { EventLang } from "types/saga";
-import { openTip, MessageTypes } from "hooks/useTips";
+import { useTips, MessageTypes } from "hooks/useTips";
 import SagaContext from "./context";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
@@ -10,6 +10,8 @@ import { useHistory } from "react-router";
 function SagaItem({ saga }: { saga: EventLang }) {
   const [loading, setLoading] = useState(false);
   const { setReload } = useContext(SagaContext);
+
+  const openTip = useTips();
 
   const history = useHistory();
 

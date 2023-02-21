@@ -2,7 +2,7 @@ import MainLayout from "layout/MainLayout";
 import { TextField, Box, Typography, Button, CircularProgress } from "@mui/material";
 import React, { useState } from "react";
 import { create } from "hooks/saga";
-import { openTip, MessageTypes } from "hooks/useTips";
+import { useTips, MessageTypes } from "hooks/useTips";
 import { Node, Value } from "types/saga";
 import { makeId } from "utils/saga";
 import Sagas from "./sagas";
@@ -15,6 +15,8 @@ export default function Home() {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [loading, setLoading] = useState(false);
   const [reload, setReload] = useState(false);
+
+  const openTip = useTips();
 
   const handleAdd = () => {
     const _nodes = [

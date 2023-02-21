@@ -1,8 +1,5 @@
-import { useCallback, useMemo } from "react";
-import { openLoading, closeLoading } from "store/loadingReducer";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import store from "store";
-import { openSnackbar } from "store/snackbar/actions";
+import { useCallback, useContext } from "react";
+import SnackbarContext from "ui-component/snackbarContext";
 
 export enum MessageTypes {
   success = "ok",
@@ -26,41 +23,18 @@ export type TIP_KEY = string | undefined | number;
 
 export type TIP_OPTIONS = { [key: string]: any };
 
-export function useFullscreenLoading(): [() => void, () => void, boolean] {
-  const dispatch = useAppDispatch();
-  const isOpen = useAppSelector((state) => state.loading.open);
+export function useTips() {
+  const { setMessage, setOpen, setAlert } = useContext(SnackbarContext);
 
-  const open = useCallback(() => {
-    dispatch(openLoading());
-  }, [dispatch]);
+  return useCallback((message: string, type: MessageTypes) => {
+    if (type === TIP_ERROR) {
+      setAlert("error");
+      setMessage(message);
+    } else {
+      setAlert("success");
+      setMessage(message);
+    }
 
-  const close = useCallback(() => {
-    dispatch(closeLoading());
-  }, [dispatch]);
-
-  return useMemo(() => [open, close, isOpen], [open, close, isOpen]);
-}
-
-export function openTip(message: string, type: MessageTypes) {
-  if (type === TIP_ERROR) {
-    store.dispatch(
-      openSnackbar({
-        message,
-        variant: "alert",
-        alertSeverity: "error",
-      })
-    );
-  } else {
-    store.dispatch(
-      openSnackbar({
-        message,
-        variant: "alert",
-        alertSeverity: "success",
-      })
-    );
-  }
-}
-
-export function openErrorTip(message: string) {
-  openTip(message, TIP_ERROR);
+    setOpen(true);
+  }, []);
 }
