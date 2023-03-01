@@ -86,3 +86,11 @@ export function enumResultFormat<T>(result: any): Result<T> {
     message: "",
   };
 }
+
+export function stringToArrayBuffer(string: string): Uint8Array {
+  return new TextEncoder().encode(string);
+}
+
+export function arrayBufferToString(arrayBuffer: Uint8Array): string {
+  return new TextDecoder("utf-8").decode(arrayBuffer);
+}

@@ -6,9 +6,11 @@ import { useTips, MessageTypes } from "hooks/useTips";
 import SagaContext from "./context";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
+import Execute from "./Execute";
 
 function SagaItem({ saga }: { saga: EventLang }) {
   const [loading, setLoading] = useState(false);
+  const [executeOpen, setExecuteOpen] = useState(false);
   const { setReload } = useContext(SagaContext);
 
   const openTip = useTips();
@@ -32,6 +34,14 @@ function SagaItem({ saga }: { saga: EventLang }) {
     history.push(`/edit/${saga.name}`);
   };
 
+  const handleLog = (saga: EventLang) => {
+    history.push(`/log/${saga.name}`);
+  };
+
+  const handleExecute = () => {
+    setExecuteOpen(true);
+  };
+
   return (
     <>
       <TableRow>
@@ -44,6 +54,12 @@ function SagaItem({ saga }: { saga: EventLang }) {
             <Button variant="contained" onClick={() => handleEdit(saga)} disabled={loading}>
               Edit
             </Button>
+            <Button variant="contained" onClick={handleExecute} disabled={loading}>
+              Execute
+            </Button>
+            <Button variant="contained" onClick={() => handleLog(saga)} disabled={loading}>
+              Logs
+            </Button>
             <Button variant="contained" onClick={() => handleDelete(saga)} disabled={loading}>
               {loading ? (
                 <CircularProgress size={18} sx={{ color: "#fff", margin: "0 10px 0 0" }}></CircularProgress>
@@ -53,6 +69,8 @@ function SagaItem({ saga }: { saga: EventLang }) {
           </Box>
         </TableCell>
       </TableRow>
+
+      <Execute open={executeOpen} saga={saga} onClose={() => setExecuteOpen(false)}></Execute>
     </>
   );
 }

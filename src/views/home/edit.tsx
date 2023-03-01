@@ -6,6 +6,7 @@ import { useTips, MessageTypes } from "hooks/useTips";
 import { Node, Value } from "types/saga";
 import { makeId } from "utils/saga";
 import { useHistory, useParams } from "react-router";
+import NodeComponent from "./Node";
 
 const DefaultValue = { name: "", comment: "" };
 
@@ -60,17 +61,10 @@ export default function Edit() {
     });
   };
 
-  const handleNodeChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    _id: string,
-    field: "name" | "id" | "func_name" | "compensate_func_name"
-  ) => {
-    const _node = nodes.filter((node) => node._id === _id)[0];
-    const index = nodes.findIndex((node) => node._id === _id);
+  const handleNodeChange = (node: Node) => {
+    const index = nodes.findIndex((ele) => ele._id === node._id);
 
     const _nodes = [...nodes];
-
-    const node = { ..._node, [field]: event.target.value } as Node;
 
     _nodes.splice(index, 1, node);
 
@@ -171,80 +165,13 @@ export default function Edit() {
 
           {nodes.length > 0 ? (
             <Box sx={{ padding: "0 0 0 120px", display: "flex", gap: "10px 0", flexDirection: "column" }}>
-              {nodes.map((node, index) => (
-                <Box
-                  sx={{
-                    display: "flex",
-                    width: "fit-content",
-                    alignItems: "center",
-                    padding: "20px",
-                    border: "1px solid #333",
-                    gap: "0 10px",
-                  }}
+              {nodes.map((node) => (
+                <NodeComponent
                   key={node._id}
-                >
-                  <Box
-                    sx={{
-                      flex: "auto",
-                      display: "flex",
-                      gap: "10px 0",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
-                      <Typography fontSize={12} sx={{ margin: "0 20px 0 0", width: "120px" }}>
-                        Name
-                      </Typography>
-                      <TextField
-                        sx={{ width: "360px" }}
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                          handleNodeChange(event, node._id, "name")
-                        }
-                        value={nodes[index].name}
-                      />
-                    </Box>
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
-                      <Typography fontSize={12} sx={{ margin: "0 20px 0 0", width: "120px" }}>
-                        Canister ID
-                      </Typography>
-                      <TextField
-                        sx={{ width: "360px" }}
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                          handleNodeChange(event, node._id, "id")
-                        }
-                        value={nodes[index].id}
-                      />
-                    </Box>
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
-                      <Typography fontSize={12} sx={{ margin: "0 20px 0 0", width: "120px" }}>
-                        Func Name
-                      </Typography>
-                      <TextField
-                        sx={{ width: "360px" }}
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                          handleNodeChange(event, node._id, "func_name")
-                        }
-                        value={nodes[index].func_name}
-                      />
-                    </Box>
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
-                      <Typography fontSize={12} sx={{ margin: "0 20px 0 0", width: "120px" }}>
-                        Compensate Func Name
-                      </Typography>
-                      <TextField
-                        sx={{ width: "360px" }}
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                          handleNodeChange(event, node._id, "compensate_func_name")
-                        }
-                        value={nodes[index].compensate_func_name}
-                      />
-                    </Box>
-                  </Box>
-
-                  <Button variant="contained" onClick={() => handleDelete(node)}>
-                    Delete
-                  </Button>
-                </Box>
+                  node={node}
+                  onNodeUpdate={handleNodeChange}
+                  onNodeDelete={handleDelete}
+                ></NodeComponent>
               ))}
             </Box>
           ) : null}
