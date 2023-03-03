@@ -86,8 +86,6 @@ export default function Execute({ open, saga, onClose }: ExecuteProps) {
   if (!values.comment) error = "Enter the description";
   if (!values.name) error = "Enter the name";
 
-  console.log(log);
-
   return (
     <Dialog open={open} title="Execute Saga" onClose={onClose}>
       <Box sx={{ display: "flex", flexDirection: "column", gap: "40px 0", padding: "24px" }}>

@@ -33,7 +33,8 @@ export default function ExecuteNode({ node, onArgsUpdate }: NodeExecuteProps) {
   const handleArgTypeChange = (type: string, index: number) => {
     const _args = [...args];
     const arg_index = args.findIndex((ele) => ele.index === index);
-    _args.splice(arg_index, 1, { value: "", index, type } as Arg);
+    const old_org = _args[arg_index];
+    _args.splice(arg_index, 1, { value: old_org?.value ?? "", index, type } as Arg);
     setArgs(_args);
     onArgsUpdate(node, _args);
   };
@@ -42,7 +43,7 @@ export default function ExecuteNode({ node, onArgsUpdate }: NodeExecuteProps) {
     const _args = [...args];
     const arg_index = args.findIndex((ele) => ele.index === index);
     const old_org = _args[arg_index];
-    _args.splice(arg_index, 1, { value, index, type: old_org.type } as Arg);
+    _args.splice(arg_index, 1, { value, index, type: old_org?.type ?? "" } as Arg);
     setArgs(_args);
     onArgsUpdate(node, _args);
   };
