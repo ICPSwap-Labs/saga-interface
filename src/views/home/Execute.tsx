@@ -50,7 +50,7 @@ export default function Execute({ open, saga, onClose }: ExecuteProps) {
     const nodeRequests: EventNodeRequest[] = [];
 
     nodes.forEach((node) => {
-      const _args = args[node.name]?.map((ele) => [ele.value, argTypeFormat(ele.type, ele.value)]);
+      const _args = args[node.name]?.map((ele) => [ele.name, argTypeFormat(ele.type, ele.value)]);
 
       const nodeRequest = {
         name: node.name,
@@ -60,12 +60,10 @@ export default function Execute({ open, saga, onClose }: ExecuteProps) {
       nodeRequests.push(nodeRequest);
     });
 
-    const executeArgs = {
+    const result = await execute({
       name: saga.name,
       nodes: nodeRequests,
-    } as EventRequest;
-
-    const result = await execute(executeArgs);
+    } as EventRequest);
 
     if (!!result) {
       setLog(result);

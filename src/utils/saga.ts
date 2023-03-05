@@ -19,8 +19,10 @@ export function makeId() {
 
 export function argTypeFormat(type: ArgKey, value: string): ArgValue | undefined {
   switch (type) {
-    case ArgKey.Bool:
-      return { [upperFirst(value)]: null } as { True: null } | { False: null };
+    case ArgKey.True:
+      return { [upperFirst(value)]: null } as { True: null };
+    case ArgKey.False:
+      return { [upperFirst(value)]: null } as { False: null };
     case ArgKey.I64:
       return { I64: BigInt(value) };
     case ArgKey.U64:

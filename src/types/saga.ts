@@ -9,7 +9,8 @@ export enum ArgKey {
   Vec = "Vec",
   Slice = "Slice",
   Text = "Text",
-  Bool = "Bool",
+  True = "True",
+  False = "False",
   Principal = "Principal",
 }
 
@@ -19,11 +20,12 @@ export type ArgTypes = {
   [ArgKey.Vec]: Array<ArgKey>;
   [ArgKey.Slice]: Uint8Array;
   [ArgKey.Text]: string;
-  [ArgKey.Bool]: boolean;
+  [ArgKey.True]: true;
+  [ArgKey.False]: false;
   [ArgKey.Principal]: Principal;
 };
 
-export type Arg = { index: number; type: ArgKey; value: string };
+export type Arg = { index: number; type: ArgKey; value: string; name: string };
 
 export type Node = {
   name: string;
