@@ -49,8 +49,8 @@ export default function Execute({ open, saga, onClose }: ExecuteProps) {
 
     const nodeRequests: EventNodeRequest[] = [];
 
-    nodes.forEach((node) => {
-      const _args = args[node.name]?.map((ele) => [ele.name, argTypeFormat(ele.type, ele.value)]);
+    nodes.forEach((node: Node) => {
+      const _args = args[node.name]?.map((ele: Arg) => [ele.name, argTypeFormat(ele.type, ele.value)]);
 
       const nodeRequest = {
         name: node.name,
