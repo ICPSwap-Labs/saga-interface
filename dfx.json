@@ -13,12 +13,8 @@
       "packtool": "vessel sources"
     }
   },
-  "dfx": "0.11.1",
+  "dfx": "0.13.1",
   "networks": {
-    "test": {
-      "bind": "dtest.app",
-      "type": "ephemeral"
-    },
     "local": {
       "bind": "127.0.0.1:8000",
       "type": "ephemeral"
